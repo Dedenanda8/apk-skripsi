@@ -46,26 +46,24 @@ class BarangController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'nama' => 'required',
-            'kategori' => 'required',
-            'stok' => 'numeric|required',
-            'harga' => 'numeric|required',
-            'exp' => 'required',
+            'id_barang' => 'required',
+            'nama_barang' => 'required',
+            'kategori_barang' => 'required',
+            'satuan' => 'required',
+            // 'stok_barang' => 'required',
         ]);
 
-        $file = $request->file('foto');
-        $org = $file->getClientOriginalName();
-        $path = 'image';
-        $file->move($path,$org);
+        // $file = $request->file('foto');
+        // $org = $file->getClientOriginalName();
+        // $path = 'image';
+        // $file->move($path,$org);
 
         $BarangModel = new BarangModel;
-        $BarangModel->nama_barang = $request->nama;
-        $BarangModel->kategori_barang = $request->kategori;
-        $BarangModel->stok_barang = $request->stok;
-        $BarangModel->harga_barang = $request->harga;
-        $BarangModel->tgl_masuk_barang = date('Y-m-d');
-        $BarangModel->expired_barang = $request->exp;
-        $BarangModel->foto_barang = $org;
+        $BarangModel->id_barang = $request->id_barang;
+        $BarangModel->nama_barang = $request->nama_barang;
+        $BarangModel->kategori_barang = $request->kategori_barang;
+        $BarangModel->satuan = $request->satuan;
+        // $BarangModel->stok_barang = $request->stok_barang;
         $BarangModel->save();
 
         Session::flash('success','Data Success Submit');
@@ -106,45 +104,44 @@ class BarangController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-            'nama' => 'required',
-            'kategori' => 'required',
-            'stok' => 'numeric|required',
-            'harga' => 'numeric|required',
-            'exp' => 'required',
+            'id_barang' => 'required',
+            'nama_barang' => 'required',
+            'kategori_barang' => 'required',
+            'satuan' => 'required',
+            // 'stok_barang' => 'required',
         ]);
 
-        $foto = $request->file('foto');
-        if ($foto == "") {
+        // $foto = $request->file('foto');
+        // if ($foto == "") {
+
+        //     $BarangModel = BarangModel::find($id);
+        //     $BarangModel->nama_barang = $request->nama;
+        //     $BarangModel->kategori_barang = $request->kategori;
+        //     $BarangModel->stok_barang = $request->stok;
+        //     $BarangModel->harga_barang = $request->harga; 
+        //     $BarangModel->expired_barang = $request->exp;
+        //     $BarangModel->save();
+
+        //     Session::flash('success','Data Success Update');
+        //     return redirect()->route('user.barang');
+
+        // } else {
+        //     $file = $request->file('foto');
+        //     $org = $file->getClientOriginalName();
+        //     $path = 'image';
+        //     $file->move($path,$org);
 
             $BarangModel = BarangModel::find($id);
-            $BarangModel->nama_barang = $request->nama;
-            $BarangModel->kategori_barang = $request->kategori;
-            $BarangModel->stok_barang = $request->stok;
-            $BarangModel->harga_barang = $request->harga; 
-            $BarangModel->expired_barang = $request->exp;
+            $BarangModel->id_barang = $request->id_barang;
+            $BarangModel->nama_barang = $request->nama_barang;
+            $BarangModel->kategori_barang = $request->kategori_barang;
+            $BarangModel->satuan = $request->satuan;
+            // $BarangModel->stok_barang = $request->stok_barang;
             $BarangModel->save();
 
             Session::flash('success','Data Success Update');
             return redirect()->route('user.barang');
-
-        } else {
-            $file = $request->file('foto');
-            $org = $file->getClientOriginalName();
-            $path = 'image';
-            $file->move($path,$org);
-
-            $BarangModel = BarangModel::find($id);
-            $BarangModel->nama_barang = $request->nama;
-            $BarangModel->kategori_barang = $request->kategori;
-            $BarangModel->stok_barang = $request->stok;
-            $BarangModel->harga_barang = $request->harga;
-            $BarangModel->expired_barang = $request->exp;
-            $BarangModel->foto_barang = $org;
-            $BarangModel->save();
-
-            Session::flash('success','Data Success Update');
-            return redirect()->route('user.barang');
-        }
+        // }
     }
 
     /**

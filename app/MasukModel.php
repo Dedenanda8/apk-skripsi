@@ -8,7 +8,7 @@ class MasukModel extends Model
 {
     protected $table = 'masuk';
     protected $fillable = [
-        'suplier_id', 'barang_id', 'tgl_masuk','jumlah_masuk',
+        'barang_id', 'tgl_masuk','jumlah_masuk',
     ];
 
 

@@ -19,25 +19,47 @@
 		<p>{{Session::get('success')}}</p>
 	</div>
 @endif
-<table class="table table-hover">
-	<tr>
-		<th>NAMA BARANG</th>
-		<th>NAMA SUPLIER</th>
-		<th>TANGGAL MASUK</th>
-		<th>JUMLAH</th>
-		<th>AKSI</th>
-	</tr>
+@if(Session::has('error'))
+	<div class="alert alert-error">
+		<p>{{Session::get('error')}}</p>
+	</div>
+@endif
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+	<thead>
+		<tr>
+			<th>NAMA BARANG</th>
+			<th>TANGGAL MASUK</th>
+			<th>JUMLAH</th>
+			<th>AKSI</th>
+		</tr>
+	</thead>
+	<tfoot>
+		<tr>
+			<th>NAMA BARANG</th>
+			<th>TANGGAL MASUK</th>
+			<th>JUMLAH</th>
+			<th>AKSI</th>
+		</tr>
+	</tfoot>
 	@foreach($data as $d)
 	<tr>
-		<td>{{$d->Barang->nama_barang}}</td>
-		<td>{{$d->Suplier->nama_suplier}}</td>
-		<td>{{$d->tgl_masuk}}</td>
-		<td>{{$d->jumlah_masuk}}</td>
 		<td>
-			<a href="{{route('user.show_masuk',$d->id)}}" class="btn btn-info">SHOW</a>
+			@if(isset($d->Barang))
+				{{$d->Barang->nama_barang}}
+			@endif
+		</td>
+		<td>
+			{{$d->tgl_masuk ?? 'Data tidak tersedia'}}
+		</td>
+		<td>
+			{{$d->jumlah_masuk ?? 'Data tidak tersedia'}}
+		</td>
+		<td>
+			<!-- <a href="{{route('user.show_masuk',$d->id)}}" class="btn btn-info">SHOW</a> -->
 			<a href="{{route('user.hapusmasuk',$d->id)}}" class="btn btn-danger" onclick="return confirm('Hapus Data..??')">HAPUS</a>
 		</td>
 	</tr>
-	@endforeach
+@endforeach
+
 </table>
 @endsection

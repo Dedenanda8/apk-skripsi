@@ -19,7 +19,17 @@
 		<p>{{Session::get('success')}}</p>
 	</div>
 @endif
-<table class="table table-hover">
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+	<thead>
+		<tr>
+			<th>NAMA PEMBELI</th>
+			<th>NAMA BARANG</th>
+			<th>TGL PEMBELIAN</th>
+			<th>JUMLAH</th>
+			<th>AKSI</th>
+		</tr>
+	</thead>
+	<tfoot>
 	<tr>
 		<th>NAMA PEMBELI</th>
 		<th>NAMA BARANG</th>
@@ -27,6 +37,7 @@
 		<th>JUMLAH</th>
 		<th>AKSI</th>
 	</tr>
+	</tfoot>
 	@foreach($data as $d)
 	<tr>
 		<td>{{$d->Pelanggan->nama_pelanggan}}</td>
@@ -34,8 +45,8 @@
 		<td>{{$d->tgl_keluar}}</td>
 		<td>{{$d->jumlah_keluar}}</td>
 		<td>
-			<a href="{{route('user.show_keluar',$d->id)}}" class="btn btn-info">DETAIL</a>
-			<a href="{{route('user.delete_keluar',$d->id)}}" onclick="return confirm('Hapus Data?')" class="btn btn-danger">HAPUS</a>
+			<!-- <a href="{{route('user.show_keluar',$d->id)}}" class="btn btn-info">DETAIL</a> -->
+			<a href="{{route('user.delete_keluar',$d->id)}}" onclick="return confirm('Hapus Data?')" class="btn btn-danger">BATAL</a>
 		</td>
 	</tr>
 	@endforeach

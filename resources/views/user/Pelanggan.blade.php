@@ -21,7 +21,19 @@
 	</div>
 @endif
 <hr>
-<table class="table table-hover">
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+	<thead>
+
+		<tr>
+			<th>NAMA</th>
+			<th>ALAMAT</th>
+			<th>NO HP</th>
+			<th>EMAIL</th>
+			<th>FOTO</th>
+			<th>AKSI</th>
+		</tr>
+	</thead>
+	<tfoot>
 	<tr>
 		<th>NAMA</th>
 		<th>ALAMAT</th>
@@ -30,6 +42,7 @@
 		<th>FOTO</th>
 		<th>AKSI</th>
 	</tr>
+	</tfoot>
 	@foreach($data as $b)
 	<tr>
 		<td>{{$b->nama_pelanggan}}</td>

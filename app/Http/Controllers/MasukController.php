@@ -49,16 +49,18 @@ class MasukController extends Controller
      */
     public function store(Request $request)
     {
-        $MasukModel = new MasukModel;
-        $MasukModel->suplier_id = $request->barang;
-        $MasukModel->barang_id = $request->suplier;
+        $MasukModel = new MasukModel();
+        // $MasukModel->suplier_id = $request->suplier; // Ubah bagian ini
+        $MasukModel->barang_id = $request->barang; // Ubah bagian ini
         $MasukModel->tgl_masuk = date('Y-m-d');
         $MasukModel->jumlah_masuk = $request->jumlah;
         $MasukModel->save();
-
+    
         $BarangModel = BarangModel::find($request->barang);
-        $BarangModel->stok_barang = $BarangModel->stok_barang + $request->jumlah;
-        $BarangModel->save();
+        if ($BarangModel) { // Pastikan model ditemukan sebelum mengakses properti
+            $BarangModel->stok_barang = $BarangModel->stok_barang + $request->jumlah;
+            $BarangModel->save();
+        }
 
         Session::flash('success','Data Success Submit');
         return redirect()->route('user.masuk');
@@ -108,10 +110,25 @@ class MasukController extends Controller
      */
     public function destroy($id)
     {
-        $MasukModel = MasukModel::find($id);
-        $MasukModel->delete();
+        $dataMasuk = MasukModel::find($id);
 
-        Session::flash('success','Data Deleted !');
+        if ($dataMasuk) {
+            // Kembalikan jumlah masuk ke stok barang
+            $BarangModel = BarangModel::find($dataMasuk->barang_id);
+            
+            if ($BarangModel) {
+                $BarangModel->stok_barang = $BarangModel->stok_barang - $dataMasuk->jumlah_masuk;
+                $BarangModel->save();
+            }
+    
+            // Hapus data masuk dari tabel masuk
+            $dataMasuk->delete();
+    
+            Session::flash('success','Data Deleted !');
+        }
+    
+
+        Session::flash('error','Data masuk tidak ditemukan. !');
         return redirect()->route('user.masuk');
     }
 }

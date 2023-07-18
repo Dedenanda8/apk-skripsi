@@ -17,14 +17,14 @@
 			@endforeach
 		</select>
 	</div>
-	<div class="form-group">
+	<!-- <div class="form-group">
 		<label>MASUKAN NAMA SUPLIER</label>
 		<select name="suplier" class="form-control">
 			@foreach($suplier as $s)
 				<option value="{{$s->id}}">{{$s->nama_suplier}}</option>
 			@endforeach
 		</select>
-	</div>
+	</div> -->
 	<div class="form-group">
 		<label>MASUKAN JUMLAH BARANG</label>
 		<input type="number" name="jumlah" class="form-control" required="">

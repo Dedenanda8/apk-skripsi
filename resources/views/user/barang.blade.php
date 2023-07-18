@@ -21,7 +21,45 @@
 	</div>
 @endif
 <hr>
-<table class="table table-hover">
+
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+							<th>id_barang</th>
+							<th>nama_barang</th>
+							<th>kategori_barang</th>
+							<th>satuan</th>
+							<th>stok_barang</th>
+							<th>AKSI</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+							<th>id_barang</th>
+							<th>nama_barang</th>
+							<th>kategori_barang</th>
+							<th>satuan</th>
+							<th>stok_barang</th>
+							<th>AKSI</th>
+                        </tr>
+                    </tfoot>
+                        @foreach ($barang as $b)
+                    <tbody>
+						<td>{{$b->id_barang}}</td>
+						<td>{{$b->nama_barang}}</td>
+						<td>{{$b->kategori_barang}}</td>
+						<td>{{$b->satuan}}</td>
+						<td>{{$b->stok_barang}}</td>
+						<td>
+							<a href="{{route('user.edit_barang',$b->id)}}" class="btn btn-warning btn-sm">EDIT</a>
+							<a href="{{route('user.delete_barang',$b->id)}}" onclick="return confirm('Yakin Akan Hapus Data..??')" class="btn btn-danger btn-sm">HAPUS</a>
+							<!-- <a href="{{route('user.show_barang',$b->id)}}" class="btn btn-success btn-sm">SHOW</a> -->
+						</td>
+										@endforeach 
+                    </tbody>
+                </table>
+
+<!-- <table class="table table-hover">
 	<tr>
 		<th>NAMA</th>
 		<th>KATEGORI</th>
@@ -44,6 +82,6 @@
 		</td>
 	</tr>
 	@endforeach
-</table>
+</table> -->
 
 @endsection

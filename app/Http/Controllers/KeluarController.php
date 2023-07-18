@@ -109,9 +109,27 @@ class KeluarController extends Controller
      */
     public function destroy($id)
     {
-        $KeluarModel =  KeluarModel::find($id);
-        $KeluarModel->delete();
-        Session::flash('success','Data Berhasil Dihapus');
-        return redirect()->route('user.keluar');
+        $keluar = KeluarModel::find($id);
+
+        if ($keluar) {
+            // Simpan jumlah keluar sebelum dihapus
+            $jumlah_keluar = $keluar->jumlah_keluar;
+    
+            // Hapus data keluar dari tabel keluar
+            $keluar->delete();
+    
+            // Kembalikan jumlah keluar ke stok barang
+            $barang = BarangModel::find($keluar->barang_id);
+            
+            if ($barang) {
+                $barang->stok_barang += $jumlah_keluar;
+                $barang->save();
+            }
+    
+            Session::flash('success', 'Data keluar berhasil dibatalkan.');
+            return redirect()->route('user.keluar');
+        }
+    
+        Session::flash('success', 'Data keluar tidak ditemukan.');
     }
 }

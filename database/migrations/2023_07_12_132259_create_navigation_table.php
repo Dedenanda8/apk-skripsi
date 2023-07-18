@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class BarangMigration extends Migration
+class CreateNavigationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class BarangMigration extends Migration
      */
     public function up()
     {
-        Schema::create('Barang',function(Blueprint $table) {
+        Schema::create('navigation', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('id_barang');
-            $table->string('nama_barang');
-            $table->string('kategori_barang');
-            $table->string('satuan');
-            $table->integer('stok_barang');
+            $table->string('Name');
+            $table->string('Kategori');
+            $table->integer('Satuan');
+            $table->bigInteger('main_menu')->null;
+            $table->string('icon');
+            $table->integer('Sort')->default(0);
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class BarangMigration extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Barang');
+        Schema::dropIfExists('navigation');
     }
 }

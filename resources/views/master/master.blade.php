@@ -15,6 +15,9 @@
   <link href=" {{asset('vendor/fontawesome-free/css/all.min.css')}} " rel="stylesheet" type="text/css">
   <!-- Custom styles for this template-->
   <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+  <!-- Custom styles for this page -->
+<link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
@@ -43,16 +46,33 @@
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
-       <li class="nav-item">
+      <hr>
+       <!-- <li class="nav-item">
         <a class="nav-link" href="{{route('user.barang')}}">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Barang</span></a>
+      </li> -->
+      <li class="nav-item">
+        <span class="text-white" style="margin-left: 20px;">Data Master</span>
       </li>
-       <li class="nav-item">
+      <li class="nav-item">
+          <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#jakarta"
+              aria-expanded="true" aria-controls="jakarta">
+              <i class="fas fa-fw fa-chart-area"></i>
+              <span>Master data</span>
+          </a>
+          <div id="jakarta" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+              <div class="bg-white py-2 collapse-inner rounded">
+                  <a class="collapse-item" href="{{route('user.barang')}}">Kelola Barang</a>
+                  <a class="collapse-item" href="{{route('user.barang')}}">Kelola Kategori</a>
+              </div>
+          </div>
+      </li>
+       <!-- <li class="nav-item">
         <a class="nav-link" href="{{route('user.suplier')}}">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Suplyer</span></a>
-      </li>
+      </li> -->
        <li class="nav-item">
         <a class="nav-link" href="{{route('user.pelanggan')}}">
           <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -156,6 +176,14 @@
 
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.min.js"></script>
+  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+<!-- Page level custom scripts -->
+<script src="js/demo/datatables-demo.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
   
 </body>
